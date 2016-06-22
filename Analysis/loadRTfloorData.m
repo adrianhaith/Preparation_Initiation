@@ -106,7 +106,7 @@ end
 data = dat;
 %dataNJ = datNJ;
 %}
-save RTfloorData_Age
+save RTfloorData
 %%
 
 

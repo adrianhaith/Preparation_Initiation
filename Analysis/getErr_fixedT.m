@@ -21,30 +21,25 @@ end
 vel_Dir = NaN*ones(1,data.Ntrials);
 
 for i=1:data.Ntrials
-    xpos = data.X{i}';
-    ypos = data.Y{i}';
-    pos = [xpos; ypos];
     clear pos_filt
-    w = 7;
-    pos_filt(1,:) = savgolayFilt(pos(1,:),3,w);
-    pos_filt(2,:) = savgolayFilt(pos(2,:),3,w);
-    
-    vel = [diff(pos_filt(1,:));diff(pos_filt(2,:))]; % compute velocity ('diff' computes difference between consecutive timepoints)
+
+    pos_filt = savgolayFilt(data.handPos{i},3,7);
+    vel = diff(pos_filt')';
     clear vel_filt
-    vel_filt(1,:) = savgolayFilt(vel(1,:),3,w);
-    vel_filt(2,:) = savgolayFilt(vel(2,:),3,w);
-    vel_filt = vel;
+    vel_filt = savgolayFilt(vel,3,7);
+    %vel_filt(2,:) = savgolayFilt(vel(2,:),3,7);
+    %vel_filt = vel;
     
     tanVel = sqrt(sum(vel_filt.^2)); % tangential velocity (i.e. overall speed, regardless of direction)
     %tanVel = savgolayFilt(tanVel,3,7); % apply a filter to smooth the data out
     
     tanAcc = diff(tanVel);
-    tanAcc = savgolayFilt(tanAcc,3,w); % smooth out acceleration data
+    tanAcc = savgolayFilt(tanAcc,3,7); % smooth out acceleration data
     
     %tanJerk = diff(tanAcc);
     %tanJerk = savgolayFilt(tanJerk,3,w);
     
-    VEL_THR_START = .02/130; % .01 m/s % previously .0001 m/frame;
+    VEL_THR_START = .02/130; % .02 m/s % previously .0001 m/frame;
     
     % find end of movement
     targDist = pos_filt-repmat([0;.15],1,size(pos_filt,2));
@@ -176,8 +171,8 @@ data.vel = velocity;
 data.tanVel = tanVelocity;
 data.tanAcc = tanAccel;
 %data.tanJerk = tanJer;
-data.rPT = data.jump_time - (data.RT/130 - .5);
-data.rPT = data.RT/130 - data.jump_time/1000;
+%data.rPT = data.targ_appear_time' - (data.RT/130 - .5);
+data.rPT = data.RT/130 - data.targ_appear_time'/1000;
 data.pkVel = pV;
 data.velDir = vel_Dir;
 %data.MTerr = -data.rPT - (data.PTg-data.jump_time);
