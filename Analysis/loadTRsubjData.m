@@ -28,6 +28,7 @@ X0 = tFile(1,1); % start position x
 Y0 = tFile(1,2); % start position y
 
 data.targPos = tFile(:,6:7)-tFile(:,1:2);
+data.targAng = atan2(data.targPos(:,2),data.targPos(:,1))*180/pi;
 data.targ_appear_time = tFile(:,8);
 
 % rotate data into canonical coordinate frame

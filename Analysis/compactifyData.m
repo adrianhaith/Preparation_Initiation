@@ -1,37 +1,24 @@
 % tidy up data structure
 clear all
-load RTfloorData_Age
+load RTfloorData_full
 
 %%
 clear d
-for i=1:Nsubj
-    for j=1:2
-        d{j}.reachDir(i,:) = data{i,j}.reachDir;
-        d{j}.curvature(i,:) = data{i,j}.d_dir;
-        d{j}.RT(i,:) = data{i,j}.rPT;
-        
-        d{j}.reachDirG(i,:) = d{j}.reachDir(i,:)-360*(data{i,j}.target_post_jump'-2)/8;
-        ibad = find(d{j}.reachDirG>180+22.5);
-        d{j}.reachDirG(ibad)=d{j}.reachDirG(ibad)-360;
-        ibad = find(d{j}.reachDirG<-180+22.5);
-        d{j}.reachDirG(ibad)=d{j}.reachDirG(ibad)+360;
-        
+for i=1:Nsubj % subjects
+    for j=1:2 % conditions
+        d{j}.reachDir(i,:) = data{i,j}.reachDir; % reach direction relative to target
+        d{j}.RT(i,:) = data{i,j}.RT; % reaction time (between targ appearance and movement initiation
+        d{j}.reachDir_absolute(i,:) = data{i,j}.reachDir_absolute;%360*(data{i,j}.target_post_jump'-2)/8; % 
         d{j}.pkVel(i,:) = data{i,j}.pkVel;
-        d{j}.velDir(i,:) = data{i,j}.velDir;
-        %dd{j}.jump_time = data{i,j}.jump_time;
     end
-    %d{4}.reachDir(i,:) = [d{1}.reachDir(i,:) d{3}.reachDir(i,:)];
-    %d{4}.reachDirG(i,:) = [d{1}.reachDirG(i,:) d{3}.reachDirG(i,:)];
-    %d{4}.RT(i,:) = [d{1}.RT(i,:) d{3}.RT(i,:)];
-    %d{4}.curvature(i,:) = [d{1}.curvature(i,:) d{3}.curvature(i,:)];
+
+    %d{j}.icatch = find(data{i,2}.jump_time);
     
-    icatch = find(data{i,2}.jump_time);
-    
-    d{2}.jump_time(i,:) = data{i,2}.jump_time;
+    %d{2}.jump_time(i,:) = data{i,2}.jump_time;
     
 end
 
-save RTfloorData_AgeSum d
+save RTfloorData_compact d
 %%
 % check absolute reach direction
 %{

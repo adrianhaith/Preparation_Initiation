@@ -1,6 +1,6 @@
 % compute p(hit)
 clear all
-load RTfloorData_AgeSum
+load RTfloorData_compact
 Nsubj = size(d{1}.reachDir,1);
 
 tol = 22.5; % max error to be considered a 'hit'
@@ -70,8 +70,8 @@ end
 
 % intended jump time
 for i=1:Nsubj
-    d{2}.RT_targ(i,:) = (1500-d{2}.jump_time(i,:))*.001;
+    %d{2}.RT_targ(i,:) = (1500-d{2}.jump_time(i,:))*.001;
 end
 
-save RTfloorData_AgeSum d
+save RTfloorData_compact_phit d
 

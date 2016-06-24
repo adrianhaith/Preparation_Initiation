@@ -1,6 +1,6 @@
 % estimate parameters of cumulative distribution
 clear all
-load RTfloorData_AgeSum
+load RTfloorData_compact_phit
 figure(1); clf; hold on
 Nsubj = size(d{2}.RT,1);
 for s = 1:Nsubj;
@@ -214,4 +214,4 @@ d{1}.pOpt_init = [muRT' sigmaRT'];
 d{1}.p_err_pred = p_err_precise_all;
 d{1}.p_err_rate = p_err_precise;
 
-save RTfloorData_AgeSum d
+save RTfloorData_compact_phit_mle d

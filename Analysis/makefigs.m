@@ -3,7 +3,7 @@
 
 clear all
 clc
-load RTfloorData_AgeSum
+load RTfloorData_compact_phit_mle
 
 ss = 2; % Example subject
 DELAY = 100;
