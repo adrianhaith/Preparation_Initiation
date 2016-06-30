@@ -6,5 +6,4 @@ loadRTfloorData
 compactifyData
 compute_phit
 MLEfit
-
 makefigs

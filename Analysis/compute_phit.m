@@ -68,10 +68,5 @@ for k=1:2
     d{k}.RThist_all = RThist_all;
 end
 
-% intended jump time
-for i=1:Nsubj
-    %d{2}.RT_targ(i,:) = (1500-d{2}.jump_time(i,:))*.001;
-end
-
 save RTfloorData_compact_phit d
 

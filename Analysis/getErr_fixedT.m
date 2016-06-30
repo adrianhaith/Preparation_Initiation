@@ -55,6 +55,7 @@ for i=1:data.Ntrials
     end
    
     tanVelocity{i} = tanVel;
+    handVel_rot{i} = vel_filt;
 end
 
 % convert from radians to degrees
@@ -75,4 +76,5 @@ data.iEnd = iEnd;
 data.tanVel = tanVelocity;
 data.RT = data.iInit/130 - data.targ_appear_time'/1000;
 data.pkVel = pkVel;
+data.handVel_rot = handVel_rot;
 
